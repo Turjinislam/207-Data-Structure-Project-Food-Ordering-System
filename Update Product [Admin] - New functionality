@@ -1,0 +1,32 @@
+char productToUpdate[100];
+                printf("Enter the product name to update: ");
+                scanf("%s", productToUpdate);
+
+                struct TreeNode* productNode = searchProduct(loadedRoot, productToUpdate);
+
+                if (productNode != NULL) {
+                    printf("Product Found: %s\n", productToUpdate);
+                    printf("Current Price: %.2f\n", productNode->product.price);
+                    printf("Enter new price (or 0 to keep current price): ");
+                    double newPrice;
+                    scanf("%lf", &newPrice);
+                    
+                    if (newPrice != 0) {
+                        productNode->product.price = newPrice;
+                    }
+
+                    printf("Enter new product ID (or 0 to keep current ID): ");
+                    int newId;
+                    scanf("%d", &newId);
+                    
+                    if (newId != 0) {
+                        productNode->product.id = newId;
+                    }
+
+                    saveProductsToFile(loadedRoot, "products.txt");
+                    printf("Product updated successfully.\n");
+                } else {
+                    printf("Product '%s' not found.\n", productToUpdate);
+                }
+                break;
+            }
